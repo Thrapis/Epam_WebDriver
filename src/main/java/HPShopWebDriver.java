@@ -6,37 +6,37 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HPShopWebDriver {
-    public static WebDriver Driver;
-    public static WebElement SearchInputField;
-    public static WebElement MonitorInfoLink;
-    public static WebElement AddToCartButton;
-    public static WebElement ToCartButton;
-    public static WebElement CartTotal;
-    public static WebElement ProductCount;
-    public static WebElement ProductName;
+    public static WebDriver driver;
+    public static WebElement searchInputField;
+    public static WebElement monitorInfoLink;
+    public static WebElement addToCartButton;
+    public static WebElement toCartButton;
+    public static WebElement cartTotal;
+    public static WebElement productCount;
+    public static WebElement productName;
 
     public static void initialization() {
-        Driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
-        Driver.get("https://hp-shop.by/");
-        Driver.manage().window().maximize();
+        driver.get("https://hp-shop.by/");
+        driver.manage().window().maximize();
 
-        SearchInputField = waitForElementLocatedBy(Driver, By.xpath("//input[@name='search']"));
-        SearchInputField.sendKeys("EliteDisplay S430c");
-        SearchInputField.submit();
+        searchInputField = waitForElementLocatedBy(driver, By.xpath("//input[@name='search']"));
+        searchInputField.sendKeys("EliteDisplay S430c");
+        searchInputField.submit();
 
-        MonitorInfoLink = waitForElementLocatedBy(Driver, By.xpath("//a[contains(text(), 'EliteDisplay S430c')]"));
-        MonitorInfoLink.click();
+        monitorInfoLink = waitForElementLocatedBy(driver, By.xpath("//a[contains(text(), 'EliteDisplay S430c')]"));
+        monitorInfoLink.click();
 
-        AddToCartButton = waitForElementLocatedBy(Driver, By.xpath("//button[@title='Добавить в корзину']"));
-        AddToCartButton.click();
+        addToCartButton = waitForElementLocatedBy(driver, By.xpath("//button[@title='Добавить в корзину']"));
+        addToCartButton.click();
 
-        ToCartButton = waitForElementLocatedBy(Driver, By.xpath("//div[@class='header-cart-area']"));
-        ToCartButton.click();
+        toCartButton = waitForElementLocatedBy(driver, By.xpath("//div[@class='header-cart-area']"));
+        toCartButton.click();
 
-        CartTotal = waitForElementLocatedBy(Driver, By.xpath("//td[@id='cart_total']"));
-        ProductCount = waitForElementLocatedBy(Driver, By.xpath("//input[@class='shk-count']"));
-        ProductName = waitForElementLocatedBy(Driver, By.xpath("//td[@class='th-details']/child::h2/child::a"));
+        cartTotal = waitForElementLocatedBy(driver, By.xpath("//td[@id='cart_total']"));
+        productCount = waitForElementLocatedBy(driver, By.xpath("//input[@class='shk-count']"));
+        productName = waitForElementLocatedBy(driver, By.xpath("//td[@class='th-details']/child::h2/child::a"));
     }
 
     private static WebElement waitForElementLocatedBy(org.openqa.selenium.WebDriver driver, By by) {

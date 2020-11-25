@@ -12,25 +12,25 @@ public class HPShopWebDriverTest extends HPShopWebDriver {
 
     @Test
     public void verifyCartTotal() {
-        String cartTotalText = CartTotal.getText();
+        String cartTotalText = cartTotal.getText();
         Double cartTotalValue = Double.parseDouble(cartTotalText.substring(0, cartTotalText.length() - 3).replace(" ", ""));
         Assert.assertTrue(cartTotalValue > 0.0);
     }
 
     @Test
     public void verifyProductCount() {
-        String productCountText = ProductCount.getAttribute("value");
+        String productCountText = productCount.getAttribute("value");
         Integer productCountValue = Integer.parseInt(productCountText);
         Assert.assertEquals((int) productCountValue, 1);
     }
 
     @Test
     public void verifyProductName() {
-        Assert.assertTrue(ProductName.getText().contains("EliteDisplay S430c"));
+        Assert.assertTrue(productName.getText().contains("EliteDisplay S430c"));
     }
 
     @AfterClass
     public void shutdown() {
-        Driver.quit();
+        driver.quit();
     }
 }
