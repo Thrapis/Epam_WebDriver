@@ -34,9 +34,9 @@ public class HPShopWebDriver {
         toCartButton = waitForElementLocatedBy(driver, By.xpath("//div[@class='header-cart-area']"));
         toCartButton.click();
 
-        cartTotal = waitForElementLocatedBy(driver, By.xpath("//td[@id='cart_total']"));
         productCount = waitForElementLocatedBy(driver, By.xpath("//input[@class='shk-count']"));
         productName = waitForElementLocatedBy(driver, By.xpath("//td[@class='th-details']/child::h2/child::a"));
+        cartTotal = waitForElementLocatedBy(driver, By.xpath("//td[@id='cart_total']"));
     }
 
     private static WebElement waitForElementLocatedBy(org.openqa.selenium.WebDriver driver, By by) {
