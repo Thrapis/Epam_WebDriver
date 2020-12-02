@@ -1,9 +1,13 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class HPShopWebDriver {
     public static WebDriver driver;
@@ -34,13 +38,20 @@ public class HPShopWebDriver {
         toCartButton = waitForElementLocatedBy(driver, By.xpath("//div[@class='header-cart-area']"));
         toCartButton.click();
 
-        productCount = waitForElementLocatedBy(driver, By.xpath("//input[@class='shk-count']"));
-        productName = waitForElementLocatedBy(driver, By.xpath("//td[@class='th-details']/child::h2/child::a"));
-        cartTotal = waitForElementLocatedBy(driver, By.xpath("//td[@id='cart_total']"));
+        productCount = fluentWaitForElementLocatedBy(driver, By.xpath("//input[@class='shk-count']"), 10, 1);
+        productName = fluentWaitForElementLocatedBy(driver, By.xpath("//td[@class='th-details']/child::h2/child::a"), 10, 1);
+        cartTotal = fluentWaitForElementLocatedBy(driver, By.xpath("//td[@id='cart_total']"), 10, 1);
     }
 
     private static WebElement waitForElementLocatedBy(org.openqa.selenium.WebDriver driver, By by) {
         return new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    private static WebElement fluentWaitForElementLocatedBy(WebDriver driver, By by, long time, long pollingEvery) {
+        Wait wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(time))
+                .pollingEvery(Duration.ofSeconds(pollingEvery))
+                .ignoring(NoSuchElementException.class);
+        return  (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 }
